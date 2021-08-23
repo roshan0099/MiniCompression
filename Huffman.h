@@ -15,6 +15,6 @@ class Huffman{
         uint32_t display_frequncy();
         char display_word();
 
-        Huffman *left = NULL, *right = NULL, *parent = NULL;
+        Huffman *link_left = NULL, *right = NULL, *link_right = NULL;
 };
 
