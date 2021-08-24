@@ -83,7 +83,7 @@ void wrapper(Test *node){
 
 int main(){
 
-    int i = 0;
+    int i = 5;
 
     auto root = create_tree(&i);
 
@@ -122,14 +122,23 @@ int main(){
     std::cout<<"thala : "<<head<<" -- "<<root<<std::endl;
     std::vector<Test*>numb;
     traverse_the_root(root,numb);
-    // wrapper(root);
     
 
-    // std::string s = "2";
 
-    // s = s + "ka";
+    // std::vector<Test*> p;
 
-    // std::cout<<s;
+    // p.push_back(root);
 
+    // std::cout<<"first outbput : "<<p[0]->data<< " -- "<<head->data<<std::endl;
+
+    // p.clear();
+
+    // std::cout<<"size : "<<p.size()<<"capicity : "<<p.capacity()<<std::endl;
+
+    // p.shrink_to_fit();
+
+    // std::cout<<"size2 : "<<p.size()<<"capicity2 : "<<p.capacity()<<std::endl;
+
+    // std::cout<<"second outbput : "<< " -- "<<head->data;
 
 }

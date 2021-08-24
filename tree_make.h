@@ -9,6 +9,13 @@ void swap(Huffman* min_val);
 void sort();
 void display();
 void filter();
-void queue_filter();
-void queue_filter_wrap();
+void build_tree();
+void build_tree_wrap();
 void tree_leaves_display(Huffman *root);
+
+//work in progress
+void wrap_around();
+void character_store();
+void node_check(std::string code);
+void code_extraction(Huffman* root, std::vector<Huffman*> node_path);
+void write_to_file();

@@ -1,6 +1,16 @@
 #pragma once
 #include<iostream>
 
+struct char_store{
+
+    char word;
+    std::string code;
+
+    char_store(char _word, std::string _code) : word(_word),code(_code){}
+
+};
+
+
 class Huffman{
 
     uint32_t frequency = 0;

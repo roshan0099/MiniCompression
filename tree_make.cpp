@@ -7,6 +7,7 @@
 
 static Huffman *head = NULL, *temp = NULL;
 static std::vector<Huffman*> huffman_pointer;
+static std::vector<char_store*> char_store_pointer;
 
 void create_all_nodes(){
 
@@ -35,11 +36,11 @@ void filter(){
 
 
     }
-
-
     huffman_pointer.swap(temp_space);
     // huffman_pointer[huffman_pointer.size()-1]->frequency_set(huffman_pointer[huffman_pointer.size()-1]->display_frequncy() -1);
-
+    
+    huffman_pointer.clear();
+    huffman_pointer.shrink_to_fit();
 
 }
 
@@ -54,7 +55,6 @@ void read_file(std::string Name){
 
         // fin.get(word);
         fin>>word;
-
         if(word >= 97 && word <= 123){
 
             huffman_pointer[word -97]->frequency_increment();
@@ -64,14 +64,14 @@ void read_file(std::string Name){
             huffman_pointer[huffman_pointer.size() -1]->frequency_increment();
     }
 
+    fin.close();
+
 }
 
 
 Huffman* create_tree(char word){
-
-
+    
     Huffman *new_Huffman = new Huffman(word);
-
     if(head == NULL){
         head = temp = new_Huffman;
     
@@ -100,9 +100,7 @@ void swap(Huffman* min_val){
 void sort(){
 
     temp = head;
-
     Huffman *check,*min_val;
-
     check = min_val = NULL;
 
     while(temp->right != NULL){
@@ -119,7 +117,6 @@ void sort(){
         }
 
         swap(min_val);    
-
         temp = temp->right;
 
     }
@@ -130,28 +127,21 @@ void display(){
 
     sort();
     filter();
-
     build_tree_wrap();
 
     temp = head;
-
     tree_leaves_display(temp);
 
     // while(temp != NULL){
-
     //     std::cout<<temp->display_word()<<"  --- "<<temp->display_frequncy()<<std::endl;
-
     //     temp = temp->right;
     // }
 
 }
 
 void queue_sort(Huffman *mega_node){
-
-    temp = head;
-
+     temp = head;
     // build_tree();
-
 }
 
 /*function to build huffman tree in a way that the first two elements of the sorted linked list will form the
@@ -161,9 +151,7 @@ void queue_sort(Huffman *mega_node){
 void build_tree(){
 
     Huffman *temp_store;
-
     int frequency;
-
     Huffman* mega_node = new Huffman('&');
 
     mega_node->link_left = temp;
@@ -200,11 +188,8 @@ void build_tree(){
 }
 
 void build_tree_wrap(){
-
     temp = head;
-
     build_tree();
-
 }
 
 void tree_leaves_display(Huffman *root){
@@ -215,5 +200,42 @@ void tree_leaves_display(Huffman *root){
         tree_leaves_display(root->link_left);
         tree_leaves_display(root->link_right);
     }
+
+}
+
+// void 
+
+void wrap_around(){
+
+    std::vector<Huffman*> node_path;
+    code_extraction(head, node_path);
+
+}
+
+void character_store(){
+
+    
+
+}
+
+void code_extraction(Huffman *root, std::vector<Huffman*> node_path){
+
+    node_path.push_back(root);
+    if(root->link_left == NULL && root->link_right == NULL){
+        //
+    }else{
+
+        code_extraction(root->link_left,node_path);
+        code_extraction(root->link_right,node_path);
+    }    
+
+}
+
+
+void write_to_file(){
+
+    // std::ofstream fin;
+    // std::ifstream fout;
+    // fin.open("sample.txt");
 
 }
