@@ -36,9 +36,11 @@ void filter(){
 
 
     }
+
+
     huffman_pointer.swap(temp_space);
     // huffman_pointer[huffman_pointer.size()-1]->frequency_set(huffman_pointer[huffman_pointer.size()-1]->display_frequncy() -1);
-    
+
     huffman_pointer.clear();
     huffman_pointer.shrink_to_fit();
 
@@ -125,9 +127,9 @@ void sort(){
 
 void display(){
 
-    sort();
-    filter();
-    build_tree_wrap();
+    // sort();
+    // filter();
+    // build_tree_wrap();
 
     temp = head;
     tree_leaves_display(temp);
