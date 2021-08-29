@@ -5,7 +5,7 @@ int main(){
     
     create_all_nodes();
     read_file("sample.txt");
-    filter();
+    display();
     
     return 0;
 }

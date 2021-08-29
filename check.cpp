@@ -81,47 +81,174 @@ void wrapper(Test *node){
 
 }
 
+
+int arr[100];
+int total_size = 100;
+int size = 0;
+
+int parent(int i ){
+    return (i-1)/2;
+}
+
+int left(int i) { return 2*i+1;}
+
+int right(int i ){ return 2*i +2;}
+
+void swap(int *arr1, int *arr2){
+    int temp = *arr1;
+    *arr1 = *arr2;
+    *arr2 = temp;
+}
+
+void delete_node(int i){
+
+    int temp_index = i;
+
+    int left_index = left(temp_index);
+    int right_index = right(temp_index);
+
+    arr[i] = arr[size -1];
+
+    if (arr[left_index] < arr[i]) temp_index = left_index;
+    else if (arr[right_index] > arr[i]) temp_index = right_index; 
+
+    if(temp_index != i){
+
+        swap(&arr[temp_index], &arr[i]);
+        delete_node(temp_index);
+    }
+}
+
+void entry(int i){
+    int temp_size = size;
+    if(size == 0){
+        arr[size] = i;
+        size++;
+    }else{
+
+        arr[size] = i;
+            // std::cout<<"parent : "<<arr[parent(size)]<<" - "<<parent(3)<<std::endl;
+        while(temp_size != 0 && arr[parent(temp_size)] > arr[temp_size] ){
+
+            swap(&arr[temp_size], &arr[parent(temp_size)]);
+
+            temp_size = parent(temp_size);
+        }
+
+        size++;
+    }
+}
+
+class h{
+
+    public :
+    int l = 0;
+    int kal();
+
+    void jam();
+};
+
+
+int h :: kal(){
+        std::cout<<"haai";
+        return 9;
+    }
+
+void h :: jam(){
+        int ka = kal();
+    }
+
+void ss(h *a, h *b){
+    h *temp = a;
+    *a = *b;
+    *b = *temp;
+    // std::cout<<"result be : "<<a->l<<std::endl;
+    // a->l = 12;
+    // a->l = 18;
+}    
 int main(){
+    h *k = new h();
+    k->l = 90;
 
-    int i = 5;
+    h *o = new h();
+    o->l = 100;
 
-    auto root = create_tree(&i);
+    std::vector<h *> ja{k,o};
 
-    i = 3;
+     std::cout<<"mone scene : "<<ja.size()<<" -- "<<ja.capacity()<<std::endl;
 
-     root->left = create_tree(&i);
+    ja.clear();
+     std::cout<<"mone scene : "<<ja.size()<<" -- "<<ja.capacity()<<std::endl;
 
-     i = 9;
 
-     root->right = create_tree(&i);
+    // ss(ja[0],ja[1]);
+    // h sample;
 
-      i = 2;
+    // std::cout<<"mone scene 2 : "<<ja[0]->l;
 
-     root->left->left = create_tree(&i);
+    // sample.jam();
 
-      i = 4;
+//     arr[0] = 0;
+// arr[1] = 0;
+//     entry(7);
+//     entry(1);
+//     entry(4);
+//     entry(10);
+//     entry(2);
+//     std::cout<<"soze be :"<<size<<std::endl;
+//     for(int i = 0; i < size; i++){
+//         std::cout<<arr[i]<<std::endl;
+//     }
 
-     root->left->right = create_tree(&i);
+//     // std::cout<<"left of : "<<arr[left(1)];
 
-      i = 10;
+//     delete_node(0);
 
-     root->right->right = create_tree(&i);
+//     std::cout<<"after : \n";
 
-    i = 7;
+//     for(int i = 0; i < size; i++){
+//         std::cout<<arr[i]<<std::endl;
+//     }
 
-     root->right->left = create_tree(&i);
+    // int i = 5;
 
-      i = 13;
+    // auto root = create_tree(&i);
 
-     root->right->right->right = create_tree(&i);
+    // i = 3;
 
-     i = 12;
+    //  root->left = create_tree(&i);
 
-     root->right->right->left = create_tree(&i);
+    //  i = 9;
+
+    //  root->right = create_tree(&i);
+
+    //   i = 2;
+
+    //  root->left->left = create_tree(&i);
+
+    //   i = 4;
+
+    //  root->left->right = create_tree(&i);
+
+    //   i = 10;
+
+    //  root->right->right = create_tree(&i);
+
+    // i = 7;
+
+    //  root->right->left = create_tree(&i);
+
+    //   i = 13;
+
+    //  root->right->right->right = create_tree(&i);
+
+    //  i = 12;
+
+    //  root->right->right->left = create_tree(&i);
       
-    std::cout<<"thala : "<<head<<" -- "<<root<<std::endl;
-    std::vector<Test*>numb;
-    traverse_the_root(root,numb);
+    // std::cout<<"thala : "<<head<<" -- "<<root<<std::endl;
+    // std::vector<Test*>numb;
+    // traverse_the_root(root,numb);
     
 
 

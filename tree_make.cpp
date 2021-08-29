@@ -5,6 +5,8 @@
 
 #define log std::cout<<
 
+using std::endl;
+
 static Huffman *head = NULL, *temp = NULL;
 static std::vector<Huffman*> huffman_pointer;
 static std::vector<char_store*> char_store_pointer;
@@ -125,22 +127,6 @@ void sort(){
 
 }
 
-void display(){
-
-    // sort();
-    // filter();
-    // build_tree_wrap();
-
-    temp = head;
-    tree_leaves_display(temp);
-
-    // while(temp != NULL){
-    //     std::cout<<temp->display_word()<<"  --- "<<temp->display_frequncy()<<std::endl;
-    //     temp = temp->right;
-    // }
-
-}
-
 void queue_sort(Huffman *mega_node){
      temp = head;
     // build_tree();
@@ -189,6 +175,8 @@ void build_tree(){
 
 }
 
+
+
 void build_tree_wrap(){
     temp = head;
     build_tree();
@@ -214,9 +202,20 @@ void wrap_around(){
 
 }
 
-void character_store(){
+void character_store(char word, std::vector<Huffman*> node_path){
 
-    
+    std::string code;
+     for(int i = 0; i < node_path.size(); i++){
+
+        if(node_path[i]->link_right != NULL && node_path[i]->link_left != NULL){
+
+            if(node_path[i]->link_right == node_path[i+1]) code +='1';
+            else code += '0';
+        }
+    }
+
+    char_store *char_store_obj = new char_store(word, code);
+    char_store_pointer.push_back(char_store_obj);
 
 }
 
@@ -224,7 +223,7 @@ void code_extraction(Huffman *root, std::vector<Huffman*> node_path){
 
     node_path.push_back(root);
     if(root->link_left == NULL && root->link_right == NULL){
-        //
+        character_store(root->display_word(), node_path);
     }else{
 
         code_extraction(root->link_left,node_path);
@@ -240,4 +239,27 @@ void write_to_file(){
     // std::ifstream fout;
     // fin.open("sample.txt");
 
+}
+
+
+
+
+void display(){
+
+    sort();
+    filter();
+    build_tree_wrap();
+
+    temp = head;
+    // tree_leaves_display(temp);
+
+    // while(temp != NULL){
+    //     std::cout<<temp->display_word()<<"  --- "<<temp->display_frequncy()<<std::endl;
+    //     temp = temp->right;
+    // }
+    wrap_around();
+
+    log"let it be : "<<endl;
+
+    for(auto i : char_store_pointer) log i->word<<" ---> "<<i->code<<endl;
 }
